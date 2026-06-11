@@ -5,5 +5,11 @@
   "description": "Toggle to hide unwanted components on YouTube Studio.",
   "action": {
     "default_popup": "popup.html"
-  }
+  },
+  "content_scripts": [
+    {
+      "js": ["scripts/dashboard.js"],
+      "matches": ["https://studio.youtube.com/channel/*"]
+    }
+  ]
 }
