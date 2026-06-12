@@ -49,24 +49,20 @@ const removeSubscriberCount = () => {
 /**
  * @param {MutationRecord[]} mutations
  */
-const observerCallback = (mutations) => {
+const observerCallback = async (mutations) => {
   for (const mutation of mutations) {
     for (const node of mutation.addedNodes) {
       if (node instanceof Element) {
-        chrome.storage.local.get(
-          [
-            "hideMonetization",
-            "hideSubscriberCount",
-            "hideAnalytics",
-            "hideSubscriberCard",
-          ],
-          (result) => {
-            if (result.hideMonetization) removeMonetization();
-            if (result.hideSubscriberCount) removeSubscriberCount();
-            if (result.hideAnalytics) removeAnalyticsCard();
-            if (result.hideSubscriberCard) removeSubscriberCard();
-          },
-        );
+        const result = await chrome.storage.local.get([
+          "hideMonetization",
+          "hideSubscriberCount",
+          "hideAnalytics",
+          "hideSubscriberCard",
+        ]);
+        if (result.hideMonetization) removeMonetization();
+        if (result.hideSubscriberCount) removeSubscriberCount();
+        if (result.hideAnalytics) removeAnalyticsCard();
+        if (result.hideSubscriberCard) removeSubscriberCard();
       }
     }
   }

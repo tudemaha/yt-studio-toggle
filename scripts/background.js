@@ -13,21 +13,18 @@ const studio = "https://studio.youtube.com";
 chrome.tabs.onUpdated.addListener(async (tabId, _, tab) => {
   if (!tab.url?.startsWith(studio)) return;
 
+  const result = await chrome.storage.local.get([
+    "hideMonetization",
+    "hideSubscriberCount",
+    "hideAnalytics",
+    "hideSubscriberCard",
+  ]);
+
   const files = ["css/empty.css"];
-  chrome.storage.local.get(
-    [
-      "hideMonetization",
-      "hideSubscriberCount",
-      "hideAnalytics",
-      "hideSubscriberCard",
-    ],
-    (result) => {
-      if (result.hideMonetization) files.push("css/monetization.css");
-      if (result.hideSubscriberCount) files.push("css/subscriber-count.css");
-      if (result.hideAnalytics) files.push("css/analytics-card.css");
-      if (result.hideSubscriberCard) files.push("css/subscriber-card.css");
-    },
-  );
+  if (result.hideMonetization) files.push("css/monetization.css");
+  if (result.hideSubscriberCount) files.push("css/subscriber-count.css");
+  if (result.hideAnalytics) files.push("css/analytics-card.css");
+  if (result.hideSubscriberCard) files.push("css/subscriber-card.css");
 
   await chrome.scripting.insertCSS({
     files,
