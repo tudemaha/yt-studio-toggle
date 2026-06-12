@@ -53,10 +53,20 @@ const observerCallback = (mutations) => {
   for (const mutation of mutations) {
     for (const node of mutation.addedNodes) {
       if (node instanceof Element) {
-        removeAnalyticsCard();
-        removeMonetization();
-        removeSubscriberCard();
-        removeSubscriberCount();
+        chrome.storage.local.get(
+          [
+            "hideMonetization",
+            "hideSubscriberCount",
+            "hideAnalytics",
+            "hideSubscriberCard",
+          ],
+          (result) => {
+            if (result.hideMonetization) removeMonetization();
+            if (result.hideSubscriberCount) removeSubscriberCount();
+            if (result.hideAnalytics) removeAnalyticsCard();
+            if (result.hideSubscriberCard) removeSubscriberCard();
+          },
+        );
       }
     }
   }
