@@ -6,8 +6,8 @@ const monetizationToggle = /** @type {HTMLInputElement} */ (
 const subscriberCountToggle = /** @type {HTMLInputElement} */ (
   document.getElementById("subscriber-count")
 );
-const subscriberListToggle = /** @type {HTMLInputElement} */ (
-  document.getElementById("subscriber-list")
+const subscriberCardToggle = /** @type {HTMLInputElement} */ (
+  document.getElementById("subscriber-card")
 );
 const analyticsCardToggle = /** @type {HTMLInputElement} */ (
   document.getElementById("analytics-card")
@@ -25,7 +25,7 @@ chrome.storage.local.get(
 
     monetizationToggle.checked = toggleStatuses.hideMonetization;
     subscriberCountToggle.checked = toggleStatuses.hideSubscriberCount;
-    subscriberListToggle.checked = toggleStatuses.hideSubscriberList;
+    subscriberCardToggle.checked = toggleStatuses.hideSubscriberCard;
     analyticsCardToggle.checked = toggleStatuses.hideAnalytics;
   },
 );
@@ -40,8 +40,8 @@ subscriberCountToggle.addEventListener("change", (event) => {
     event.target
   ).checked;
 });
-subscriberListToggle.addEventListener("change", (event) => {
-  toggleStatuses.hideSubscriberList = /** @type {HTMLInputElement} */ (
+subscriberCardToggle.addEventListener("change", (event) => {
+  toggleStatuses.hideSubscriberCard = /** @type {HTMLInputElement} */ (
     event.target
   ).checked;
 });
