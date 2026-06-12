@@ -1,0 +1,7 @@
+div.apply-item-padding.style-scope.ytcd-channel-facts-item:has(+ hr.divider) {
+  display: none !important;
+}
+
+.apply-item-padding + hr.divider.style-scope.ytcd-channel-facts-item {
+  display: none !important;
+}

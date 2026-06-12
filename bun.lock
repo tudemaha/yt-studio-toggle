@@ -1,0 +1,13 @@
+{
+  "lockfileVersion": 1,
+  "workspaces": {
+    "": {
+      "devDependencies": {
+        "chrome-types": "^0.1.429",
+      },
+    },
+  },
+  "packages": {
+    "chrome-types": ["chrome-types@0.1.429", "", {}, "sha512-+GZMwJQ4GEhrlZsEanDWnjbw9YDv0nZRxGyEEqDcjI1PvW8ucsKVn/5hmnmKv/j/hgL1pIbU6J1ixaNKRiNaGg=="],
+  }
+}

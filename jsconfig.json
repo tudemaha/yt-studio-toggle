@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "checkJs": true,
+    "types": ["chrome-types"]
+  },
+  "include": ["**/*.js"]
+}

@@ -6,6 +6,11 @@
   "action": {
     "default_popup": "popup.html"
   },
+  "permissions": ["scripting"],
+  "host_permissions": ["https://studio.youtube.com/*"],
+  "background": {
+    "service_worker": "scripts/background.js"
+  },
   "content_scripts": [
     {
       "js": ["scripts/dashboard.js"],

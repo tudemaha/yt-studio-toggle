@@ -1,0 +1,4 @@
+li:has(a[href*="monetization"]) {
+  display: none !important;
+}
+
