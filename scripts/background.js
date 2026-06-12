@@ -13,7 +13,7 @@ const studio = "https://studio.youtube.com";
 chrome.tabs.onUpdated.addListener(async (tabId, _, tab) => {
   if (!tab.url?.startsWith(studio)) return;
 
-  const files = [];
+  const files = ["css/empty.css"];
   chrome.storage.local.get(
     [
       "hideMonetization",
@@ -35,23 +35,27 @@ chrome.tabs.onUpdated.addListener(async (tabId, _, tab) => {
   });
 });
 
-const monetization = studio + "/channel/**/monetization/**";
-chrome.declarativeNetRequest.updateDynamicRules({
-  addRules: [
-    {
-      id: 1001,
-      priority: 1,
-      action: {
-        type: "redirect",
-        redirect: {
-          url: "https://studio.youtube.com",
+chrome.storage.local.get("hideMonetization").then((result) => {
+  if (result) {
+    const monetization = studio + "/channel/**/monetization/**";
+    chrome.declarativeNetRequest.updateDynamicRules({
+      addRules: [
+        {
+          id: 1001,
+          priority: 1,
+          action: {
+            type: "redirect",
+            redirect: {
+              url: "https://studio.youtube.com",
+            },
+          },
+          condition: {
+            urlFilter: monetization,
+            resourceTypes: ["main_frame"],
+          },
         },
-      },
-      condition: {
-        urlFilter: monetization,
-        resourceTypes: ["main_frame"],
-      },
-    },
-  ],
-  removeRuleIds: [1001],
+      ],
+      removeRuleIds: [1001],
+    });
+  }
 });
